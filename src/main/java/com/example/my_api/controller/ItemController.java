@@ -28,12 +28,13 @@ public class ItemController {
     public ResponseEntity<Item> getItemById(@PathVariable String id) {
         Optional<Item> item = itemRepository.findById(id);
         return item.map(ResponseEntity::ok)
-                   .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // 3. CREATE (POST)
     @PostMapping
     public Item createItem(@RequestBody Item item) {
+        System.out.println(">>> RECEIVED ITEM: " + item.getName() + " - " + item.getPrice());
         return itemRepository.save(item);
     }
 
