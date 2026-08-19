@@ -18,7 +18,7 @@ public class ItemController {
     private ItemRepository itemRepository;
 
     // 1. GET ALL
-    @GetMapping
+    @GetMapping("/all")
     public List<Item> getAllItems() {
         return itemRepository.findAll();
     }
@@ -31,14 +31,8 @@ public class ItemController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Welcome message for root URL
-    @GetMapping("/")
-    public String home() {
-        return "Taste & Fit API is live!";
-    }
-
     // 3. CREATE (POST)
-    @PostMapping
+    @PostMapping("/create")
     public Item createItem(@RequestBody Item item) {
         System.out.println(">>> RECEIVED ITEM: " + item.getName() + " - " + item.getPrice());
         return itemRepository.save(item);
