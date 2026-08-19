@@ -24,11 +24,10 @@ public class ItemController {
     }
 
     // 2. GET BY ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Item> getItemById(@PathVariable String id) {
-        Optional<Item> item = itemRepository.findById(id);
-        return item.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    // Welcome message for root URL
+    @GetMapping("/")
+    public String home() {
+        return "Taste & Fit API is live!";
     }
 
     // 3. CREATE (POST)
