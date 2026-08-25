@@ -3,8 +3,10 @@ package com.example.my_api.controller;
 import com.example.my_api.model.Item;
 import com.example.my_api.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.annotation.PostConstruct;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +18,17 @@ public class ItemController {
 
     @Autowired
     private ItemRepository itemRepository;
+
+    // --- TEMPORARY DEBUG: remove after checking ---
+    @Value("${spring.data.mongodb.uri}")
+    private String mongoUri;
+
+    @PostConstruct
+    public void checkMongoUri() {
+        System.out.println("Resolved spring.data.mongodb.uri starts with: " +
+                mongoUri.substring(0, Math.min(20, mongoUri.length())));
+    }
+    // --- END DEBUG ---
 
     // 1. GET ALL
     @GetMapping("/all")
